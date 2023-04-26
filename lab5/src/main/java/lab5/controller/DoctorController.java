@@ -78,6 +78,7 @@ public class DoctorController {
 			 return new ResponseEntity<>(doctor, HttpStatus.OK);
 	}
 	
+	@PreAuthorize("hasAuthority('ROLE_ADMIN')")
 	@GetMapping("/illPatients")
 	public ResponseEntity<?> getIllPatients() {
 			
