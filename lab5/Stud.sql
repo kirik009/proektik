@@ -51,7 +51,7 @@ INSERT INTO `hospital`.`patients` (`pat_id`, `pat_name`, `surname`, `phone_numbe
     ON UPDATE NO ACTION);
     
 INSERT INTO `hospital`.`illnesses` (`id`, `name`, `date_start`, `date_end`, `pat_id`) VALUES ('1', 'GRIPP', '25.03.2003', '30.03.2003', '1');
-INSERT INTO `hospital`.`illnesses` (`id`, `name`, `date_start`, `date_end`, `pat_id`) VALUES ('2', 'KORONA', '08.04.2004', NULL, '1');
+INSERT INTO `hospital`.`illnesses` (`id`, `name`, `date_start`, `date_end`, `pat_id`) VALUES ('2', 'KORONA', '08.04.2004', NULL, '3');
 INSERT INTO `hospital`.`illnesses` (`id`, `name`, `date_start`, `date_end`, `pat_id`) VALUES ('3', 'VETRYANKA', '24.04.2004', '27.04.2004', '2');
 
 CREATE TABLE `users` (

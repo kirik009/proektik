@@ -78,6 +78,22 @@ public class DoctorController {
 			 return new ResponseEntity<>(doctor, HttpStatus.OK);
 	}
 	
+	@GetMapping("/illPatients")
+	public ResponseEntity<?> getIllPatients() {
+			
+			List<Doctor> entities = service.read();
+			if (entities.isEmpty()) {
+				return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+			} 
+			return new ResponseEntity<>(entities.stream().
+					filter(p -> 
+					p.getPatient().stream()
+					.anyMatch(i -> 
+					i.getIllnesses().stream()
+					.allMatch(d -> d.getDateEnd()== null))).collect(Collectors.toList()), HttpStatus.OK);
+		            
+		}	
+	
 	@PreAuthorize("hasAuthority('ROLE_ADMIN')")
 	@PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<String> put(@RequestBody Doctor entity) {
