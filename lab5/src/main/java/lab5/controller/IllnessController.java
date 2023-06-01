@@ -47,7 +47,7 @@ import lab5.service.IllnessService;
 				return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 			}
 			return new ResponseEntity<>(entity, HttpStatus.OK);
-		}	
+		}
 		
 		@PreAuthorize("hasAuthority('ROLE_USER')")
 		@GetMapping("/name/{name}")
