@@ -47,8 +47,7 @@ import lab5.service.IllnessService;
 				return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 			}
 			return new ResponseEntity<>(entity, HttpStatus.OK);
-		}
-		
+		}	
 		
 		@PreAuthorize("hasAuthority('ROLE_USER')")
 		@GetMapping("/name/{name}")
@@ -60,7 +59,6 @@ import lab5.service.IllnessService;
 			}
 			return new ResponseEntity<>(illnesses, HttpStatus.OK);
 		}
-		
 		
 		@PreAuthorize("hasAuthority('ROLE_USER')")
 		@PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE)

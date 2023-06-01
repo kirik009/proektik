@@ -26,12 +26,10 @@ import lab5.service.DoctorService;
 
 @RestController
 @RequestMapping(value = "api/doctor", produces = MediaType.APPLICATION_JSON_VALUE)
-
 public class DoctorController {
  
 	@Autowired
 	private DoctorService service;
-	
 	
 	@Autowired
 	private ModelMapper modelMapper;

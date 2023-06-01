@@ -60,7 +60,6 @@ public class PatientController {
 	return new ResponseEntity<>(patient, HttpStatus.OK);
 	}
 	
-	
 	@PreAuthorize("hasAuthority('ROLE_USER')")
 	@PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
 	@Operation(summary = "создание объекта с типом «пациент»")
