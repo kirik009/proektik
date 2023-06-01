@@ -56,7 +56,7 @@ public class DoctorController {
 			 return new ResponseEntity<>(entities, HttpStatus.OK);	
 }
 	@GetMapping("/{id}/")
-	@Operation(summary = "получение объекта с типом «доктор» по конкретному id")
+	@Operation(summary ="получение объекта с типом «доктор» по конкретному id")
 	public ResponseEntity<?> getById(@PathVariable long id) {
 		Doctor entity = service.read(id);
 		if (entity == null) {

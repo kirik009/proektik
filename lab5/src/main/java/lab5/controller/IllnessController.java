@@ -62,7 +62,7 @@ import lab5.service.IllnessService;
 		
 		@PreAuthorize("hasAuthority('ROLE_USER')")
 		@PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-		@Operation(summary = "создание объекта с типом «болезнь»")
+		@Operation(summary ="создание объекта с типом «болезнь»")
 		public ResponseEntity<String> put(@RequestBody Illness entity) {
 			service.save(entity);
 			return new ResponseEntity<>(HttpStatus.CREATED);
