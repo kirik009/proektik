@@ -29,7 +29,7 @@ public class PatientController {
 	
 	@PreAuthorize("hasAuthority('ROLE_USER')")
 	@GetMapping
-	@Operation(summary = "получение всех объектов с типом «пациент»")
+	@Operation(summary ="получение всех объектов с типом «пациент»")
 	public ResponseEntity<List<Patient>> get() {
 		List<Patient> entities = service.read();
 		if (entities.isEmpty()) {
