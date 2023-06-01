@@ -18,12 +18,15 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import io.swagger.v3.oas.annotations.Operation;
 import lab5.dto.DocDTO;
 import lab5.entity.Doctor;
 import lab5.service.DoctorService;
 
 @RestController
 @RequestMapping(value = "api/doctor", produces = MediaType.APPLICATION_JSON_VALUE)
+
 public class DoctorController {
  
 	@Autowired
@@ -42,6 +45,7 @@ public class DoctorController {
 	}
 	
 	@GetMapping()
+	@Operation(summary = "Получение списка докторов")
 	public ResponseEntity<?> get() {
 		
 		List<Doctor> entities = service.read();
@@ -54,6 +58,7 @@ public class DoctorController {
 			 return new ResponseEntity<>(entities, HttpStatus.OK);	
 }
 	@GetMapping("/{id}/")
+	@Operation(summary = "получение объекта с типом «доктор» по конкретному id")
 	public ResponseEntity<?> getById(@PathVariable long id) {
 		Doctor entity = service.read(id);
 		if (entity == null) {
@@ -67,6 +72,7 @@ public class DoctorController {
 	}
 	
 	@GetMapping("/docName/{docName}/")
+	@Operation(summary = "получение объекта с типом «доктор» по имени")
 	public ResponseEntity<?> getPatientsBySurname(@PathVariable String docName) {
 		Doctor doctor = service.readByDocName(docName);
 	if (doctor == null) {
@@ -80,6 +86,7 @@ public class DoctorController {
 	
 	@PreAuthorize("hasAuthority('ROLE_ADMIN')")
 	@GetMapping("/illPatients")
+	@Operation(summary = "получение списка докторов у которых, есть больные пациенты")
 	public ResponseEntity<?> getIllPatients() {
 			
 			List<Doctor> entities = service.read();
@@ -97,6 +104,7 @@ public class DoctorController {
 	
 	@PreAuthorize("hasAuthority('ROLE_ADMIN')")
 	@PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
+	@Operation(summary = "создание объекта с типом «доктор»)")
 	public ResponseEntity<String> put(@RequestBody Doctor entity) {
 		service.save(entity);
 		return new ResponseEntity<>(HttpStatus.CREATED);
@@ -104,6 +112,7 @@ public class DoctorController {
 	
 	@PreAuthorize("hasAuthority('ROLE_ADMIN')")
 	@PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
+	@Operation(summary = "обновление объекта с типом «доктор»")
 	public ResponseEntity<String> post(@RequestBody Doctor entity) {
 		service.save(entity);
 		return new ResponseEntity<>(HttpStatus.OK);
@@ -111,6 +120,7 @@ public class DoctorController {
 	
 	@PreAuthorize("hasAuthority('ROLE_ADMIN')")
 	@DeleteMapping("/{id}")
+	@Operation(summary = "удаление объекта с типом «доктор») по id")
 	public ResponseEntity<String> delete(@PathVariable long id) {
 		service.delete(id);
 		return new ResponseEntity<>(HttpStatus.OK);

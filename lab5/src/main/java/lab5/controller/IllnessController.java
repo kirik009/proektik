@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import io.swagger.v3.oas.annotations.Operation;
 import lab5.entity.Illness;
 import lab5.service.IllnessService;
 
@@ -28,6 +29,7 @@ import lab5.service.IllnessService;
 		
 		@PreAuthorize("hasAuthority('ROLE_USER')")
 		@GetMapping
+		@Operation(summary = "получение всех объектов с типом «болезнь»")
 		public ResponseEntity<List<Illness>> get() {
 			List<Illness> entities = service.read();
 			if (entities.isEmpty()) {
@@ -38,6 +40,7 @@ import lab5.service.IllnessService;
 		
 		@PreAuthorize("hasAuthority('ROLE_USER')")
 		@GetMapping("/{id}")
+		@Operation(summary = "получение объекта с типом «болезнь» по конкретному id")
 		public ResponseEntity<Illness> getById(@PathVariable long id) {
 			Illness entity = service.read(id);
 			if (entity == null) {
@@ -47,17 +50,9 @@ import lab5.service.IllnessService;
 		}
 		
 		
-//		@GetMapping("/patient/{id}")
-//		public ResponseEntity<List<Illness>> getIllnessesByPatient(@PathVariable long id) {
-//		List<Illness> illnesses = service.readByPatient(id);
-//		if (illnesses.isEmpty()) {
-//			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-//		}
-//		return new ResponseEntity<>(illnesses, HttpStatus.OK);
-//		}
-		
 		@PreAuthorize("hasAuthority('ROLE_USER')")
 		@GetMapping("/name/{name}")
+		@Operation(summary = "получение объекта с типом «болезнь» по названию")
 		public ResponseEntity<List<Illness>> getIllnessesByName(@PathVariable String name) {
 			List<Illness> illnesses = service.readByName(name);
 			if (illnesses.isEmpty()) {
@@ -69,6 +64,7 @@ import lab5.service.IllnessService;
 		
 		@PreAuthorize("hasAuthority('ROLE_USER')")
 		@PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
+		@Operation(summary = "создание объекта с типом «болезнь»")
 		public ResponseEntity<String> put(@RequestBody Illness entity) {
 			service.save(entity);
 			return new ResponseEntity<>(HttpStatus.CREATED);
@@ -76,6 +72,7 @@ import lab5.service.IllnessService;
 		
 		@PreAuthorize("hasAuthority('ROLE_USER')")
 		@PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
+		@Operation(summary = "обновление объекта с типом «болезнь»")
 		public ResponseEntity<String> post(@RequestBody Illness entity) {
 			service.save(entity);
 			return new ResponseEntity<>(HttpStatus.OK);
@@ -83,6 +80,7 @@ import lab5.service.IllnessService;
 		
 		@PreAuthorize("hasAuthority('ROLE_USER')")
 		@DeleteMapping("/{id}")
+		@Operation(summary = "удаление объекта с типом «болезнь»  по id")
 		public ResponseEntity<String> delete(@PathVariable long id) {
 			service.delete(id);
 			return new ResponseEntity<>(HttpStatus.OK);

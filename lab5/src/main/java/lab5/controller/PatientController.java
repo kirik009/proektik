@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import io.swagger.v3.oas.annotations.Operation;
 import lab5.entity.Patient;
 import lab5.service.PatientService;
 
@@ -28,6 +29,7 @@ public class PatientController {
 	
 	@PreAuthorize("hasAuthority('ROLE_USER')")
 	@GetMapping
+	@Operation(summary = "получение всех объектов с типом «пациент»")
 	public ResponseEntity<List<Patient>> get() {
 		List<Patient> entities = service.read();
 		if (entities.isEmpty()) {
@@ -38,6 +40,7 @@ public class PatientController {
 	
 	@PreAuthorize("hasAuthority('ROLE_USER')")
 	@GetMapping("/{id}")
+	@Operation(summary = "получение объекта с типом «пациент» по конкретному id")
 	public ResponseEntity<Patient> getById(@PathVariable long id) {
 		Patient entity = service.read(id);
 		if (entity == null) {
@@ -48,6 +51,7 @@ public class PatientController {
 	
 	@PreAuthorize("hasAuthority('ROLE_USER')")
 	@GetMapping("/surname/{surname}")
+	@Operation(summary = "получение объекта с типом «пациент» по фамилии")
 	public ResponseEntity<Patient> getIllnessesByName(@PathVariable String surname) {
 	Patient patient = service.readBySurname(surname);
 	if (patient == null) {
@@ -56,19 +60,10 @@ public class PatientController {
 	return new ResponseEntity<>(patient, HttpStatus.OK);
 	}
 	
-
-//	@GetMapping("/doctor/{id}")
-//	public ResponseEntity<List<Patient>> getPatientsByDoctor(@PathVariable long id) {
-//	List<Patient> patients = service.readByDoctor(id);
-//	if (patients.isEmpty()) {
-//		return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-//	}
-//	return new ResponseEntity<>(patients, HttpStatus.OK);
-//	}
-	
 	
 	@PreAuthorize("hasAuthority('ROLE_USER')")
 	@PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
+	@Operation(summary = "создание объекта с типом «пациент»")
 	public ResponseEntity<String> put(@RequestBody Patient entity) {
 		service.save(entity);
 		return new ResponseEntity<>(HttpStatus.CREATED);
@@ -76,6 +71,7 @@ public class PatientController {
 	
 	@PreAuthorize("hasAuthority('ROLE_USER')")
 	@PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
+	@Operation(summary = "обновление объекта с типом «пациент»")
 	public ResponseEntity<String> post(@RequestBody Patient entity) {
 		service.save(entity);
 		return new ResponseEntity<>(HttpStatus.OK);
@@ -83,6 +79,7 @@ public class PatientController {
 	
 	@PreAuthorize("hasAuthority('ROLE_USER')")
 	@DeleteMapping("/{id}")
+	@Operation(summary = "удаление объекта с типом «пациент» по id")
 	public ResponseEntity<String> delete(@PathVariable long id) {
 		service.delete(id);
 		return new ResponseEntity<>(HttpStatus.OK);
