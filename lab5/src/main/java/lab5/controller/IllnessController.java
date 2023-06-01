@@ -40,7 +40,7 @@ import lab5.service.IllnessService;
 		
 		@PreAuthorize("hasAuthority('ROLE_USER')")
 		@GetMapping("/{id}")
-		@Operation(summary ="получение объекта с типом «болезнь» по конкретному id")
+		@Operation(summary = "получение объекта с типом «болезнь» по конкретному id")
 		public ResponseEntity<Illness> getById(@PathVariable long id) {
 			Illness entity = service.read(id);
 			if (entity == null) {
