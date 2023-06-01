@@ -96,8 +96,7 @@ public class DoctorController {
 					p.getPatient().stream()
 					.anyMatch(i -> 
 					i.getIllnesses().stream()
-					.allMatch(d -> d.getDateEnd()== null))).collect(Collectors.toList()), HttpStatus.OK);
-		            
+					.allMatch(d -> d.getDateEnd()== null))).collect(Collectors.toList()), HttpStatus.OK);        
 		}	
 	
 	@PreAuthorize("hasAuthority('ROLE_ADMIN')")

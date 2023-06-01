@@ -84,6 +84,3 @@ import lab5.service.IllnessService;
 			return new ResponseEntity<>(HttpStatus.OK);
 		}
 	}
-
-		
-	
